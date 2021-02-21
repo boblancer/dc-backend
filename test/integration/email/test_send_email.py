@@ -1,16 +1,26 @@
+import unittest
 import easyimap
+import sys
+sys.path.append('/dc-backend/email')
+import server
 
-def test_send_email():
-    login = 'toonkunggs@gmail.com'
-    password = 'gvtmqzqtwhwhdpjh'
+class TestSendEmail(unittest.TestCase):
 
-    imapper = easyimap.connect('imap.gmail.com', login, password)
+    def test_send_email(self, email='toonkunggs@gmail.com', password='gvtmqzqtwhwhdpjh'):
+        imapper = easyimap.connect('imap.gmail.com', email, password)
+        senders = []
+        titles = []
+        for mail_id in imapper.listids(limit = 20):
+            mail = imapper.mail(mail_id)
+            senders.append(mail.from_addr)
+            titles.append(mail.title)
+        imapper.quit()
+        self.assertTrue('toonkunggs@gmail.com' in senders and 'Your fortune cookie today' in titles)
+
+if __name__ == '__main__':
+    unittest.main()
 
 
-    for mail_id in imapper.listids(limit = 20):
-        mail = imapper.mail(mail_id)
 
-        if 'toonkunggs@gmail.com' in mail.from_addr and 'Your fortune cookie today' in mail.title:
-            return True
-        else:
-            return False
+
+
