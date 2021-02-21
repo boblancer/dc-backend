@@ -11,12 +11,10 @@ jobs:
       - python/load-cache
       - python/install-deps
       - python/save-cache
-      - run:
-          command: export FLASK_APP=email/server.py
-          name: setenv
-      - run:
-          command: flask run --host=0.0.0.0
-          name: Test
+      - run: sudo pip install pipenv
+      - run: pipenv install 
+      - run: python -m unittest discover -p "Test_server*.py"
+      - run: pipenv run pytest
 
 workflows:
   main:
