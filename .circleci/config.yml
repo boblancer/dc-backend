@@ -7,7 +7,7 @@ jobs:
   test:
     executor: python/default
     environment: 
-      IMAGETAG:: << pipeline.parameteres.image-tag >> 
+      IMAGETAG:: << pipeline.number >> 
     steps:
       - checkout
       - python/load-cache
