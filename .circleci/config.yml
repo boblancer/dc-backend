@@ -12,6 +12,10 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
+          command: export FLASK_APP=email/server.py
+          name: setenv
+      export FLASK_APP=hello.py
+      - run:
           command: flask run --host=0.0.0.0
           name: Test
 
