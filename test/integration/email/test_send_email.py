@@ -1,8 +1,5 @@
 import unittest
 import easyimap
-import sys
-sys.path.append('/dc-backend/email')
-import server
 
 class TestSendEmail(unittest.TestCase):
 
