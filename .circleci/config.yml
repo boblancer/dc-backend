@@ -4,8 +4,10 @@ orbs:
   python: circleci/python@0.2.1
 
 jobs:
-  build-and-test:
+  test:
     executor: python/default
+    environment: 
+      IMAGETAG:: << pipeline.parameteres.image-tag >> 
     steps:
       - checkout
       - python/load-cache
@@ -15,8 +17,9 @@ jobs:
       - run: pipenv install 
       - run: python -m unittest discover -p "Test_server*.py"
       - run: pipenv run pytest
+    
 
 workflows:
   main:
     jobs:
-      - build-and-test
+      - test
