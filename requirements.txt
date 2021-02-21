@@ -6,5 +6,4 @@ easyimap == 0.6.3
 psycopg2 == 2.8.6
 json5 ==0.9.5
 psycopg2-binary ==2.8.6
-Flask-Cors ==0.3.7
-
+Flask-Cors ==3.0.8
